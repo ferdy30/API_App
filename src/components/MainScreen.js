@@ -9,7 +9,7 @@ export default function App() {
   const [personajes, setRickApi] = useState([]);
 
   const fetchPersonajes = () => {
-  fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
+  fetch('https://rickandmortyapi.com/api/character')
   .then(response => response.json())
   .then(RickyMorty => setRickApi(RickyMorty.results));
   };
