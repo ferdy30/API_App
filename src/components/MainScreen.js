@@ -1,10 +1,17 @@
 
 import React,{useState,useEffect} from 'react';
+import { logger } from "react-native-logs";
 import { Text, View, StyleSheet,Image,TouchableOpacity } from 'react-native';
 
 
+const log = logger.createLogger();
 
-export default function App() {
+
+
+export default function MainScreen() {
+  
+
+  
 
   const [personajes, setRickApi] = useState([]);
 
@@ -17,6 +24,16 @@ export default function App() {
   useEffect(() => {
   fetchPersonajes();
   },[]);
+  
+  useEffect(() => {
+    personajes.map((RyMdata, index)=>{ 
+         log.info("Nombre: ",RyMdata.name,"Especie: " , RyMdata.species, "Estado: ", RyMdata.status);
+        
+  }, []);
+
+    })
+    
+
 
   return (
     <View style={styles.container}>
@@ -29,12 +46,14 @@ export default function App() {
           <Text style = {styles.txt}>PERSONAJES</Text>
 
       {
-        personajes.map((RyMdata, index)=>{
-          return (
-                
 
-            <View style = {styles.container1}>
-                <TouchableOpacity
+
+        personajes.map((RyMdata, index)=>{
+        return (
+                
+          
+            <View style = {styles.container1} key={index}>
+                <View
                   activeOpacity={0.5}
                   key={index}
                   style={styles.card}
@@ -52,19 +71,25 @@ export default function App() {
                     }}
                   />
                   
-                  
+                 
                   <Text style = {styles.txt1}>{RyMdata.name}</Text>
                   <Text style = {styles.text2}>Especie: {RyMdata.species}</Text>
                   <Text style = {styles.text2}>Status: {RyMdata.status}</Text>
                 
-                </TouchableOpacity>
+                </View>
                 
                 </View>
               );
+
+              
         })
       }
     </View>
-  );
+ 
+ 
+ );
+ 
+
 
 
   
